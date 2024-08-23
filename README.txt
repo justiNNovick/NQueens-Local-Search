@@ -21,6 +21,14 @@ process will iteratively work towards improving/reducing the total number of CSP
 between all rows.
 
 TIME COMPLEXITY OF METHOD:
+At each iteration of the main loop over max_iterations, when I call find_most_conflicted_queen(),
+this is a quadratic operation; this is so as it may iterate over n elements (s.t n=board length) to find the
+position with the most csp violation, and at each iteration i, such that 0 ≤ i ≤ n, it iterates n times again to
+find the conflict with respect to the other pieces ⇒ O(n^2). Overall, this quadratic operation can be called
+a number of times equal to m = max_iterations * random_restarts. Technically, since I provided the option
+to change these values we can view the whole algorithm as O(m * n^2) time complexity. However, since I
+set a default to the factors of m, and they don’t need to be provided as input, we can also just think of
+them as constants. In this case, the algorithm would be O(n^2).
 
 
 OVERCOMING LOCAL OPTIMA:

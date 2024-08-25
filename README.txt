@@ -32,3 +32,20 @@ them as constants. In this case, the algorithm would be O(n^2).
 
 
 OVERCOMING LOCAL OPTIMA:
+On the first draft of my code, I was often times encountering local optimum. In the context of this
+problem, a local optimum is when the total summation of all conflicts/csp violations, over all pieces is
+minimized relative to previous iterations; however, this differs from the global optimum, which is where the
+sum of conflicts over all pieces is 0. When I encountered this, my program wasn’t necessarily getting
+closer to the solution in a timely manner, so I employed random restarts and randomized hill climbing. The
+random restarts occur if max_iterations have been reached without finding a solution; this technique
+re-scrambles the board (re-initializes) so it won't waste too much time solving the problem at an
+arrangement that could potentially lead to stifling runtime in the future. As well, I also employ a technique
+similar to randomized hill climbing by additionally keeping track of the second-most desirable place a
+given queen should move —that is the row producing the second smallest number of csp violations.
+Then, when making a decision as to which row to move a given queen to, with probability=0.95, I consider
+the list of most desirable rows, and with probability=.05, I consider the second most greedily attractive
+row. To take this further, I could further refine this approach by implementing simulated annealing (by
+making these probabilities proportionate to the iteration number), however, given that the TA solution is
+around 50 lines of code, I did not choose to do so. Overall, my technique allows for wiggle room to
+escape local maximums and plateaus by allowing for possible random resets and, occasionally, some
+non-greedy moves.
